@@ -1,41 +1,3 @@
-# Структура проекта
-
-cadastral-service/
-├── cmd/
-│   ├── api/
-│   │   └── main.go
-│   └── mock-server/
-│       └── main.go
-├── internal/
-│   ├── api/
-│   │   ├── handler.go
-│   │   ├── middleware.go
-│   │   └── routes.go
-│   ├── models/
-│   │   └── models.go
-│   ├── repository/
-│   │   └── repository.go
-│   ├── service/
-│   │   └── service.go
-│   └── config/
-│       └── config.go
-├── migrations/
-│   └── 001_init.sql
-├── pkg/
-│   ├── database/
-│   │   └── database.go
-│   └── logger/
-│       └── logger.go
-├── docker-compose.yml
-├── Dockerfile
-├── Dockerfile.mock
-├── Makefile
-├── go.mod
-├── go.sum
-├── README.md
-└── test/
-    └── api_test.go
-
 # Cadastral Service
 
 Микросервис для обработки кадастровых запросов с эмуляцией внешнего сервера.
@@ -92,4 +54,42 @@ make test-api
 
 # Запустить тесты
 make test
+
+# Структура проекта
+
+cadastral-service/
+├── cmd/
+│   ├── api/
+│   │   └── main.go
+│   └── mock-server/
+│       └── main.go
+├── internal/
+│   ├── api/
+│   │   ├── handler.go
+│   │   ├── middleware.go
+│   │   └── routes.go
+│   ├── models/
+│   │   └── models.go
+│   ├── repository/
+│   │   └── repository.go
+│   ├── service/
+│   │   └── service.go
+│   └── config/
+│       └── config.go
+├── migrations/
+│   └── 001_init.sql
+├── pkg/
+│   ├── database/
+│   │   └── database.go
+│   └── logger/
+│       └── logger.go
+├── docker-compose.yml
+├── Dockerfile
+├── Dockerfile.mock
+├── Makefile
+├── go.mod
+├── go.sum
+├── README.md
+└── test/
+    └── api_test.go
 
