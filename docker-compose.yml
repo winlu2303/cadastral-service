@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: cadastral
+      POSTGRES_PASSWORD: cadastral123
+      POSTGRES_DB: cadastral_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./migrations:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cadastral"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      DATABASE_URL: postgres://cadastral:cadastral123@postgres:5432/cadastral_db?sslmode=disable
+      PORT: "8080"
+      LOG_LEVEL: "info"
+      AUTH_ENABLED: "true"
+      JWT_SECRET: "your-secret-key-change-in-production"
+      EXTERNAL_SERVER_URL: "http://mock-server:8081/api/result"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./config:/app/config
+
+  mock-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.mock
+    ports:
+      - "8081:8081"
+    environment:
+      PORT: "8081"
+      DELAY_MAX: "60"
+
+  adminer:
+    image: adminer
+    ports:
+      - "8082:8080"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
