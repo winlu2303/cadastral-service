@@ -56,7 +56,7 @@ make test-api
 make test
 
 # Структура проекта
-
+```
 cadastral-service/
 ├── cmd/
 │   ├── api/
@@ -92,4 +92,4 @@ cadastral-service/
 ├── README.md
 └── test/
     └── api_test.go
-
+```
